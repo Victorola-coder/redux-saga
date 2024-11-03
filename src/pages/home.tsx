@@ -10,9 +10,26 @@ import {
   Image as ImageIcon,
   Settings as SettingsIcon,
   Construction as ConstructionIcon,
-  Delete as DeleteIcon,
 } from "@mui/icons-material";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { LineChart, Line, PieChart, Pie, Cell } from "recharts";
+
+const lineData = [
+  { name: "Jan", value: 30 },
+  { name: "Feb", value: 20 },
+  { name: "Mar", value: 50 },
+  { name: "Apr", value: 40 },
+  { name: "May", value: 70 },
+];
+
+const pieData = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+];
+
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function Home() {
   const [value, setValue] = React.useState(0);
@@ -105,93 +122,119 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-5 gap-y-8 flex flex-row gap-[100px]">
-          <div>
+        <section className="mt-5 flex flex-col md:flex-row gap-5">
+          <div className="flex-1">
             <h4 className="text-3xl font-medium text-main">
               Development Activity
             </h4>
-
-            {/* Graph Placeholder */}
-            <div className="mt-4 bg-gray-50 rounded-lg p-4 h-48">
-              {/* Replace this div with an actual graph component later */}
-              <div className="w-full h-full bg-blue-100/50 rounded flex items-center justify-center text-gray-400">
-                Activity Graph Placeholder
-              </div>
-            </div>
-
-            {/* Activity Table */}
-            <div className="mt-4 overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      User
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Commit
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
+            <LineChart width={500} height={300} data={lineData}>
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+            <div className="mt-5">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="text-gray-500">
+                    <th className="py-2">U ser</th>
+                    <th className="py-2">Commit</th>
+                    <th className="py-2">Date</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {[
-                    {
-                      user: "Ronald Bradley",
-                      commit: "Initial commit",
-                      date: "May 6, 2018",
-                    },
-                    {
-                      user: "Russell Gibson",
-                      commit: "Main structure",
-                      date: "April 22, 2018",
-                    },
-                    {
-                      user: "Beverly Armstrong",
-                      commit: "Left sidebar adjustments",
-                      date: "April 15, 2018",
-                    },
-                  ].map((item, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="h-10 w-10 rounded-full bg-gray-200"></div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {item.user}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {item.commit}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {item.date}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <button
-                          className="text-gray-400 hover:text-gray-600"
-                          aria-label="Copy commit hash"
-                        >
-                          <DeleteIcon fontSize="small" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                <tbody>
+                  <tr className="border-t">
+                    <td className="py-2 flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                      Ronald Bradley
+                    </td>
+                    <td className="py-2">Initial commit</td>
+                    <td className="py-2">May 6, 2018</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-2 flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                      Russell Gibson
+                    </td>
+                    <td className="py-2">Main structure</td>
+                    <td className="py-2">April 22, 2018</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-2 flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                      Beverly Armstrong
+                    </td>
+                    <td className="py-2">Left sidebar adjustments</td>
+                    <td className="py-2">April 15, 2018</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          <div>
+          <div className="flex-1">
             <h4 className="text-3xl font-medium text-main">
-              Read our documentation with code sample
+              Read our documentation with code samples
             </h4>
+            <div className="flex mt-5 gap-5">
+              <div className="w-full md:w-1/2 border border-gray-200 h-[250px] shadow-md">
+                <div className="flex flex-col items-center justify-center h-full">
+                  <h5 className="text-xl font-medium mb-3">
+                    User Distribution
+                  </h5>
+                  <PieChart width={200} height={200}>
+                    <Pie
+                      data={pieData}
+                      cx={100}
+                      cy={100}
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {pieData.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </div>
+              </div>
+              <div className="w-full md:w-1/2 border border-gray-200 h-[250px] shadow-md">
+                <div className="flex flex-col items-center justify-center h-full">
+                  <h5 className="text-xl font-medium mb-3">Sales Breakdown</h5>
+                  <PieChart width={200} height={200}>
+                    <Pie
+                      data={pieData}
+                      cx={100}
+                      cy={100}
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {pieData.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </div>
+              </div>
+            </div>
+            <div className="flex mt-5 gap-5">
+              <div className="text-center flex-1 bg-gray-100 p-4 rounded-md">
+                <h5 className="text-lg font-medium">New Feedback</h5>
+                <p className="text-2xl font-bold">24</p>
+              </div>
+              <div className="text-center flex-1 bg-gray-100 p-4 rounded-md">
+                <h5 className="text-lg font-medium">Today Profit</h5>
+                <p className="text-2xl font-bold">$1,200</p>
+              </div>
+            </div>
           </div>
         </section>
       </main>
