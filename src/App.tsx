@@ -10,33 +10,33 @@ import { Home, NotFound, Login } from "./pages";
 import { Scroll } from "./animation";
 
 // Authentication function
-const isAuthenticated = () => {
-  // Check if the user is authenticated by making an API call or checking local storage
-  // Replace this with your actual authentication logic
-  const userToken = localStorage.getItem("userToken");
+// const isAuthenticated = () => {
+//   // Check if the user is authenticated by making an API call or checking local storage
+//   // Replace this with your actual authentication logic
+//   const userToken = localStorage.getItem("userToken");
 
-  if (userToken) {
-    // Verify the token by making an API call to your server
-    // If the token is valid, return true; otherwise, return false
-    // Example API call:
-    // const response = await fetch('/api/verify-token', {
-    //   headers: {
-    //     'Authorization': `Bearer ${userToken}`
-    //   }
-    // });
-    // return response.ok;
+//   if (userToken) {
+//     // Verify the token by making an API call to your server
+//     // If the token is valid, return true; otherwise, return false
+//     // Example API call:
+//     // const response = await fetch('/api/verify-token', {
+//     //   headers: {
+//     //     'Authorization': `Bearer ${userToken}`
+//     //   }
+//     // });
+//     // return response.ok;
 
-    // For simplicity, let's assume the token is valid if it exists
-    return true;
-  }
+//     // For simplicity, let's assume the token is valid if it exists
+//     return true;
+//   }
 
-  return false;
-};
+//   return false;
+// };
 
-// PrivateRoute component
-const PrivateRoute = ({ element }: { element: React.ReactNode }) => {
-  return isAuthenticated() ? element : <Login />;
-};
+// // PrivateRoute component
+// const PrivateRoute = ({ element }: { element: React.ReactNode }) => {
+//   return isAuthenticated() ? element : <Login />;
+// };
 
 // this is just for dome paages you want to repeat same component
 const Root = () => {
@@ -58,16 +58,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <PrivateRoute element={<Home />} />,
+        element: <Home />,
       },
       {
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/dashboard",
-        element: <PrivateRoute element={<Home />} />,
-      },
+
       {
         path: "*",
         element: <NotFound />,

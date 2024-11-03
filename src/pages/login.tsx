@@ -34,6 +34,7 @@ const LoginForm: React.FC = () => {
       onSubmit={handleSubmit}
       className="flex flex-col w-full min-h-[100dvh] items-center_ justify-center max-w-[300px] mx-auto"
     >
+      <h3 className="text-2xl font-bold mb-4">Login</h3>
       <input
         type="text"
         placeholder="Username"
