@@ -1,31 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // Hard-code login details
-    const hardcodedUsername = "admin";
-    const hardcodedPassword = "password123";
+    // Simulate an async login process
+    setTimeout(() => {
+      const hardcodedUsername = "user";
+      const hardcodedPassword = "password123";
 
-    if (username === hardcodedUsername && password === hardcodedPassword) {
-      // Save login status to localStorage
-      localStorage.setItem("isLoggedIn", "true");
-      dispatch({ type: "LOGIN_SUCCESS" });
-    } else {
-      dispatch({ type: "LOGIN_FAILURE" });
-    }
+      if (username === hardcodedUsername && password === hardcodedPassword) {
+        localStorage.setItem("isLoggedIn", "true");
+        dispatch({ type: "LOGIN_SUCCESS" });
+        navigate("/");
+      } else {
+        dispatch({ type: "LOGIN_FAILURE" });
+      }
+      setIsLoading(false);
+    }, 1000); // Simulate a network request delay
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col max-w-[300px] mx-auto"
+      className="flex flex-col w-full min-h-[100dvh] items-center_ justify-center max-w-[300px] mx-auto"
     >
       <input
         type="text"
@@ -41,8 +48,12 @@ const LoginForm: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="mb-2 p-2"
       />
-      <button type="submit" className="p-2 bg-blue-500 text-white">
-        Login
+      <button
+        type="submit"
+        className="p-2 bg-blue-500 text-white"
+        disabled={isLoading}
+      >
+        {isLoading ? "Loading..." : "Login"}
       </button>
     </form>
   );

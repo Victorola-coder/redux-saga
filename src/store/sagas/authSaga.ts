@@ -5,8 +5,8 @@ import { loginSuccess, loginFailure } from "../../actions/authAction";
 function* loginSaga(action: any) {
   try {
     const { username, password } = action.payload;
-    if (username === "admin" && password === "password") {
-      const user = { username: "admin", name: "Admin User" };
+    if (username === "user" && password === "password") {
+      const user = { username: "user", name: "user User" };
       yield put(loginSuccess(user));
     } else {
       yield put(loginFailure("Invalid credentials"));

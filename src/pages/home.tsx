@@ -76,7 +76,7 @@ export default function Home() {
                 ></div>
                 <div>
                   <h5 className="text-black text-base">Jane Pearson</h5>
-                  <p className="text-[12px] text-gray-500">Administrator</p>
+                  <p className="text-[12px] text-gray-500">useristrator</p>
                 </div>
               </div>
             </div>
