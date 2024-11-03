@@ -5,7 +5,15 @@ import rootSaga from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const initialState = {
+  auth: undefined,
+};
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  applyMiddleware(sagaMiddleware)
+);
 
 sagaMiddleware.run(rootSaga);
 
